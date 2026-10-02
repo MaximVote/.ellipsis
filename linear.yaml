@@ -53,6 +53,7 @@ session:
       - The repository is checked out at /sandbox/maxim from https://github.com/MaximVote/maxim. Fetch origin/qa before branching.
       - Search open pull requests in MaximVote/maxim for this Linear identifier before creating a branch.
       - If one exists, check out its head and commit there. Create a branch named <type>/<linear-id>-<kebab-summary> from origin/qa only when no open pull request exists.
+      - Before committing to that head, confirm the installation token can push to its repository. The token is scoped to MaximVote/maxim. If the head is a fork the token cannot update, do not commit. Reply once that the pull request cannot be changed from this installation, and stop.
       - Implement only what the ticket and triggering comment ask for.
       - Follow AGENTS.md, Claude.md, and apps/web/AGENTS.md.
       - Never add a GraphQL Shield allow rule.

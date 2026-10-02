@@ -60,6 +60,7 @@ session:
       3. Implement
       - The repository is checked out at /sandbox/maxim. Fetch origin/qa before branching.
       - On a pull request mention, check out that pull request's head and commit there. Create a branch named <type>/<kebab-summary> from origin/qa only when opening a new pull request.
+      - Before committing to a pull request head, confirm the installation token can push to that head repository. The token is scoped to MaximVote/maxim. If the head is a fork the token cannot update, do not commit. Reply once that the pull request cannot be changed from this installation, and stop.
       - Implement only what the triggering comment asks for.
       - Follow AGENTS.md, Claude.md, and apps/web/AGENTS.md.
       - Never add a GraphQL Shield allow rule.
