@@ -43,7 +43,7 @@ session:
       - If the actor is the Ellipsis app, stop without another comment or pull request.
 
       2. Decide
-      - Load the issue identifier, title, description, and acceptance criteria. The triggering comment is part of the task.
+      - Load the issue ID, identifier, canonical URL, title, description, and acceptance criteria through the Linear tools. Keep this originating issue ID and URL for the pull request and follow-up, even when the task mentions other tickets. Do not invent a URL or substitute another issue. The triggering comment is part of the task.
       - If this is only a connection test, a question, ambiguous, or not a code change, reply once in the same thread: "✅ Connection works. No code change needed." Do not repeat the run link. Stop. Do not open a pull request.
       - Estimate the effort before editing files. Do not make a large architectural change. This includes a new service, a new framework, a database migration, an authentication or authorization redesign, or a rewrite of an existing subsystem.
       - Do not proceed when the change is likely to require more than 20 files.
@@ -83,10 +83,18 @@ session:
       - If a check failed, open or update a draft and list the failed command names in the body. A draft is the failure path, not a pull request that waited for passing checks.
       - Do not request reviewers. Do not assign MaximVote/merge-approvers or any other reviewer.
       - Title and commit use Gitmoji plus Conventional Commits, for example ":bug: fix(api): stop duplicate vote credits".
-      - The body explains why, links the Linear identifier, lists the Husky commands and other checks that passed, and ends with "Generated with Ellipsis".
+      - The body explains why, lists the Husky commands and other checks that passed, and ends with "Generated with Ellipsis".
+      - Include `Originating Linear ticket: [ISSUE_IDENTIFIER](ISSUE_URL)` in the body, using the identifier and canonical URL loaded in step 2. This is required for new, reused, and draft pull requests. When updating an existing body, preserve its content and other ticket links; add the originating ticket link only if it is missing.
       - Never describe a failing or unrun check as passed.
 
-      8. Follow up once
+      8. Link the pull request to the originating ticket
+      - After creating or updating a pull request, read its actual number and URL with `gh`. Use that URL, not a branch or compare URL.
+      - Through the connected Linear tools, attach the pull request URL to the originating issue ID from step 2, titled `PR #NUMBER: PR_TITLE`. Do this for new, reused, and draft pull requests.
+      - Check the issue's existing attachments first. If the same pull request URL is already attached, reuse it instead of adding a duplicate. Do not remove other attachments or replace the issue description.
+      - If the connected Linear tools do not support attachments or the attachment fails, report that limitation in the Ellipsis session and still post the pull request link in the triggering thread in step 9. Do not request a token or claim the attachment succeeded.
+      - If no pull request was created or updated, do not attach a link.
+
+      9. Follow up once
       - Reply once in the same thread.
       - For a pull request: "🛠️ [PR #123](PR_URL) — short summary. ✅ checks passed. 👤 Assign a merge approver on the PR."
       - If it is a draft: "🛠️ [PR #123](PR_URL) — short summary. ⚠️ draft, checks failed: <failed command names>. 👤 Assign a merge approver on the PR."
